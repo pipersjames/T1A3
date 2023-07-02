@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# navigate to shell script directory
+SCRIPT_DIR=$(dirname "$0")
+cd "$SCRIPT_DIR"
 # check if python is installed or not
 # install it if not
 
@@ -15,6 +18,7 @@ python3 --version
 
 # install packages
 pip install tabulate
+
 # run python file
 python3 main.py
 
