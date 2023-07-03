@@ -73,8 +73,9 @@ source venv/bin/activate
 pip3 install tabulate
 
 # run python file
-python3 main.py
 clear
+python3 main.py
+
 
 # deactivate
 deactivate
