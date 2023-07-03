@@ -1,17 +1,5 @@
 import sys
 import functions
-#menu for function selection
-
-
-
-
-
-
-
-
-
-
-
 
 def menu_selection():
     open_message = "Welcome to the Stocktake App, Please choose what you would like to do from the list of options;"

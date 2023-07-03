@@ -17,10 +17,12 @@ def print_count_sheet():
     
         reader = csv.DictReader(info)
         data = list(reader)
+
         for i in range(len(data)):
             data[i].pop("units")
             data[i].pop("costperunit")
             data[i].update({"count" : " "}) 
+
         print(tabulate(data, headers="keys", tablefmt="grid"), file=open("count_sheet.txt", "w"))
         print("-----------------------------------------------------")
         print("The count sheet has been generated as count_sheet.txt")
@@ -28,7 +30,33 @@ def print_count_sheet():
 
 #takes user input for counted items
 def input_counts():
-    pass
+    count_items = []
+    count_input = []
+
+    with open("database.csv") as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            count_items.append(row["stockcode"])
+
+    dict_of_counts = {}
+
+    while True:
+        for i in range(len(count_items)):
+            count = input(f"Please enter the count of item {count_items[i]} : ")
+            count_input.append(count)
+
+        dict_of_counts = dict(zip(count_items, count_input))
+        print(tabulate(dict_of_counts, headers="keys", tablefmt="grid"))
+
+        choice = input("Are you happy with the quantities? (Y/N): ")
+        if choice.upper() == "Y":
+            break
+        elif choice.upper() == "N":
+            count_input.clear()
+        else:
+            print("Invalid selection. Please select Y for yes or N for no")
+    
+        return dict_of_counts
 
 #creates a variance report saving a copy by the name chosen
 def generate_variance_report():
