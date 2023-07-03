@@ -15,7 +15,7 @@ def print_list_of_items():
             data[i].pop("units")
             data[i].pop("costperunit")
             data[i].update({"count" : " "}) 
-        print(tabulate(data, headers="keys", tablefmt="grid"), file=open("count_sheet.txt", "a"))
+        print(tabulate(data, headers="keys", tablefmt="grid"), file=open("count_sheet.txt", "w"))
         print("The count sheet has been generated as count_sheet.txt")
 
     
