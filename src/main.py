@@ -1,6 +1,7 @@
 import sys
 import functions
 
+
 def menu_selection():
     open_message = "Welcome to the Stocktake App, Please choose what you would like to do from the list of options;"
     menu_options = {
@@ -9,7 +10,8 @@ def menu_selection():
         "P": functions.print_count_sheet,
         "I": functions.input_counts,
         "R": functions.generate_variance_report,
-        "F": functions.confirm_and_commit_changes
+        "F": functions.confirm_and_commit_changes,
+        "Q": functions.print_counts,
     }
 
     while True:

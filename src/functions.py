@@ -1,7 +1,7 @@
 import csv
 from tabulate import tabulate
 
-
+dict_of_counts = {}
 
 #setup list and stocktake for location to location count
 def location_to_location():
@@ -37,8 +37,8 @@ def input_counts():
         reader = csv.DictReader(csvfile)
         for row in reader:
             count_items.append(row["stockcode"])
-
-    dict_of_counts = {}
+    
+    global dict_of_counts
 
     while True:
         for i in range(len(count_items)):
@@ -48,15 +48,20 @@ def input_counts():
         dict_of_counts = dict(zip(count_items, count_input))
         print(tabulate(dict_of_counts, headers="keys", tablefmt="grid"))
 
-        choice = input("Are you happy with the quantities? (Y/N): ")
-        if choice.upper() == "Y":
-            break
-        elif choice.upper() == "N":
-            count_input.clear()
-        else:
-            print("Invalid selection. Please select Y for yes or N for no")
+        while True:
+            choice = input("Are you happy with the quantities? (Y/N): ")
+            if choice.upper() == "Y":
+                break
+            elif choice.upper() == "N":
+                count_input.clear()
+                input_counts()
+            else:
+                print("Invalid selection. Try pressing either Y for yes or N for N")
     
         return dict_of_counts
+    
+def print_counts():
+    print(dict_of_counts)
 
 #creates a variance report saving a copy by the name chosen
 def generate_variance_report():
