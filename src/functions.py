@@ -1,10 +1,31 @@
 import csv
 from tabulate import tabulate
 
+#global variables
+data = {}
+stocktake_selection = []
 dict_of_counts = {}
 
 #setup list and stocktake for location to location count
 def location_to_location():
+    global data
+    global stocktake_selection
+
+    range_value_1 = input("what is the start location: ").upper()
+    range_value_2 = input("what is the finish location: ").upper()
+
+    with open("database.csv") as info:
+        reader = csv.DictReader(info)
+        data = list(reader)
+
+
+
+    stocktake_selection = [d for d in data if range_value_1 <= d["location"] <= range_value_2]
+
+    print(stocktake_selection)
+
+
+
     pass
 
 #setup list and stocktake for cycle code count
@@ -13,6 +34,8 @@ def cycle_code():
 
 #generates a count sheet of range of values 
 def print_count_sheet():
+    global data
+
     with open("database.csv") as info:
     
         reader = csv.DictReader(info)
@@ -28,15 +51,20 @@ def print_count_sheet():
         print("The count sheet has been generated as count_sheet.txt")
         print("-----------------------------------------------------")
 
+        return data
+    
+
 #takes user input for counted items
 def input_counts():
     count_items = []
     count_input = []
 
-    with open("database.csv") as csvfile:
-        reader = csv.DictReader(csvfile)
-        for row in reader:
-            count_items.append(row["stockcode"])
+    for row in data:
+        count_items.append(row["stockcode"])
+    # with open("database.csv") as csvfile:
+    #     reader = csv.DictReader(csvfile)
+    #     for row in reader:
+    #         count_items.append(row["stockcode"])
     
     global dict_of_counts
 
@@ -59,9 +87,6 @@ def input_counts():
                 print("Invalid selection. Try pressing either Y for yes or N for N")
     
         return dict_of_counts
-    
-def print_counts():
-    print(dict_of_counts)
 
 #creates a variance report saving a copy by the name chosen
 def generate_variance_report():

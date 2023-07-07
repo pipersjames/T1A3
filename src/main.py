@@ -11,7 +11,6 @@ def menu_selection():
         "I": functions.input_counts,
         "R": functions.generate_variance_report,
         "F": functions.confirm_and_commit_changes,
-        "Q": functions.print_counts,
     }
 
     while True:
