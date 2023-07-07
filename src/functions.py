@@ -1,15 +1,8 @@
 import csv
 from tabulate import tabulate
 
-#global variables
-data = {}
-stocktake_selection = []
-dict_of_counts = {}
-
 #setup list and stocktake for location to location count
 def location_to_location():
-    global data
-    global stocktake_selection
 
     range_value_1 = input("what is the start location: ").upper()
     range_value_2 = input("what is the finish location: ").upper()
@@ -22,53 +15,42 @@ def location_to_location():
 
     stocktake_selection = [d for d in data if range_value_1 <= d["location"] <= range_value_2]
 
-    print(stocktake_selection)
+    print(f"This is the selection you have chosen: {stocktake_selection}")
+
+    return stocktake_selection
 
 
-
-    pass
 
 #setup list and stocktake for cycle code count
 def cycle_code():
     pass
 
 #generates a count sheet of range of values 
-def print_count_sheet():
-    global data
+def print_count_sheet(selection_data):
 
-    with open("database.csv") as info:
-    
-        reader = csv.DictReader(info)
-        data = list(reader)
+    for i in range(len(selection_data)):
+        selection_data[i].pop("units")
+        selection_data[i].pop("costperunit")
+        selection_data[i].update({"count" : " "}) 
 
-        for i in range(len(data)):
-            data[i].pop("units")
-            data[i].pop("costperunit")
-            data[i].update({"count" : " "}) 
-
-        print(tabulate(data, headers="keys", tablefmt="grid"), file=open("count_sheet.txt", "w"))
-        print("-----------------------------------------------------")
-        print("The count sheet has been generated as count_sheet.txt")
-        print("-----------------------------------------------------")
-
-        return data
+    print(tabulate(selection_data, headers="keys", tablefmt="grid"), file=open("count_sheet.txt", "w"))
+    print("-----------------------------------------------------")
+    print("The count sheet has been generated as count_sheet.txt")
+    print("-----------------------------------------------------")
     
 
 #takes user input for counted items
-def input_counts():
+def input_counts(selection_data):
     count_items = []
     count_input = []
+    dict_of_counts = {}
 
-    for row in data:
+    for row in selection_data:
         count_items.append(row["stockcode"])
-    # with open("database.csv") as csvfile:
-    #     reader = csv.DictReader(csvfile)
-    #     for row in reader:
-    #         count_items.append(row["stockcode"])
-    
-    global dict_of_counts
 
     while True:
+        count_input.clear()
+
         for i in range(len(count_items)):
             count = input(f"Please enter the count of item {count_items[i]} : ")
             count_input.append(count)
@@ -81,12 +63,14 @@ def input_counts():
             if choice.upper() == "Y":
                 break
             elif choice.upper() == "N":
-                count_input.clear()
-                input_counts()
+                break
             else:
-                print("Invalid selection. Try pressing either Y for yes or N for N")
-    
-        return dict_of_counts
+                print("Invalid selection. Try pressing either Y for yes or N for no")
+
+        if choice.upper() == "Y":
+            break
+
+    return dict_of_counts
 
 #creates a variance report saving a copy by the name chosen
 def generate_variance_report():

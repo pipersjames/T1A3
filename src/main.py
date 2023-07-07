@@ -3,7 +3,13 @@ import functions
 
 
 def menu_selection():
+
+
     open_message = "Welcome to the Stocktake App, Please choose what you would like to do from the list of options;"
+
+    stocktake_selection = []
+    dict_of_counts = {}
+
     menu_options = {
         "L": functions.location_to_location,
         "C": functions.cycle_code,
@@ -26,24 +32,23 @@ def menu_selection():
         5. Confirm and Commit Changes (F)
         6. Exit the Program (E)
     """)
+        
         open_message = "What would you like to do now?"
         choice = input(">").upper()
+
         if choice == "E":
             break
+
         elif choice in menu_options:
-            action = menu_options[choice]
-            action()
-            while True: 
-                choice = input("Do you want to take another action? (Y/N): ")
-                if choice.upper() == "Y":
-                    break
-                elif choice.upper() == "N":
-                    print("Thank you for using the Stocktake App. Happy counting!")
-                    exit()
+            if choice == "L":
+                stocktake_selection = menu_options[choice]()
+            elif choice == "I" or choice == "P":
+                if stocktake_selection:
+                    dict_of_counts = menu_options[choice](stocktake_selection)
                 else:
-                    print("Invalid input. Please press Y for yes or N for no")
-        else:
-            print("Invalid choice. Please try again")
+                    print("No stocktake selection available. Please proceed to select a counting method first")
+            else:
+                menu_options[choice]()
             
     print("Thank you for using the Stocktake App. Happy counting!")
 
