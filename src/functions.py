@@ -2,6 +2,7 @@ import csv
 from tabulate import tabulate
 from datetime import datetime
 import os
+import copy
 
 #setup list and stocktake for location to location count
 def location_to_location():
@@ -30,12 +31,14 @@ def cycle_code():
 #generates a count sheet of range of values 
 def print_count_sheet(selection_data):
 
-    for i in range(len(selection_data)):
-        selection_data[i].pop("units")
-        selection_data[i].pop("costperunit")
-        selection_data[i].update({"count" : " "}) 
+    data = copy.deepcopy(selection_data)
 
-    print(tabulate(selection_data, headers="keys", tablefmt="grid"), file=open("count_sheet.txt", "w"))
+    for i in range(len(data)):
+        data[i].pop("units")
+        data[i].pop("costperunit")
+        data[i].update({"count" : " "}) 
+
+    print(tabulate(data, headers="keys", tablefmt="grid"), file=open("count_sheet.txt", "w"))
     print("-----------------------------------------------------")
     print("The count sheet has been generated as count_sheet.txt")
     print("-----------------------------------------------------")

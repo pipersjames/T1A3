@@ -19,6 +19,8 @@ def menu_selection():
         "F": functions.confirm_and_commit_changes,
     }
 
+
+
     while True:
         print(f"""
     {open_message}
