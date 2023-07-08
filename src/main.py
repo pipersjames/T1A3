@@ -19,8 +19,6 @@ def menu_selection():
         "F": functions.confirm_and_commit_changes,
     }
 
-
-
     while True:
         print(f"""
     {open_message}
@@ -51,6 +49,8 @@ def menu_selection():
                     print("No stocktake selection available. Please proceed to select a counting method first")
             elif choice == "R":
                 menu_options[choice](stocktake_selection,count)
+            elif choice == "F":
+                menu_options[choice](count)
             else:
                 menu_options[choice]()
             

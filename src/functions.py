@@ -86,7 +86,7 @@ def generate_variance_report(selection_data, count):
         variance = int(units2) - int(units1)
         totalcost = int(variance) * int(costperunit)
         variance_report.append({"stockcode": stockcode, "description": description, "units_in_database": units1, "count": units2, "variance": variance, "cost_difference": totalcost}) 
-        # prepared_changes.append({"stockcode": stockcode, "description": description, "location": location, "units": units2, "costperunit": costperunit})
+        prepared_changes.append({"stockcode": stockcode, "description": description, "location": location, "units": units2, "costperunit": costperunit})
 
     current_date = datetime.now().strftime("%d-%b-%Y")
     folder_name = "variance reports"
@@ -104,15 +104,48 @@ def generate_variance_report(selection_data, count):
     print("---------------------------------------------------------------------")
     print(f"The variance report has been generated as {file_name}")
     print("---------------------------------------------------------------------")
-    # print(prepared_changes)
     
     return variance_report
-    # return prepared_changes
 
 
 
 
 
 #confirm variances and updates the database to reflect counts
-def confirm_and_commit_changes():
-    pass
+def confirm_and_commit_changes(count):
+    
+    confirmation = input("Are you sure you wish to proceed in committing changes to the database? (Y/N)")
+
+    if confirmation.upper() == "Y":
+        changes = copy.deepcopy(count)
+        confirmation_file = []
+
+        with open("database.csv") as info:
+            reader = csv.DictReader(info)
+            data = list(reader)
+            
+        for item_in_changes in changes:
+            item_in_changes_id = item_in_changes["stockcode"]
+            for item_in_database in data:
+                if item_in_database["stockcode"] == item_in_changes_id:
+                    item_in_database.update(item_in_changes)
+                    break
+    
+        fieldnames = data[0].keys()  
+
+        with open("database.csv", "w", newline="") as info:
+            writer = csv.DictWriter(info, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(data)
+
+        print("Changes have been commited to the database, returning to menu...")
+    
+    elif confirmation.upper() == "N":
+        print("No changes have been made, returning to menu...")
+    else:
+        print("Not a valid input, returning to menu...")
+        
+
+        
+
+        
