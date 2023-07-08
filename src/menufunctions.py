@@ -17,19 +17,24 @@ def location_to_location():
     range_value_2 = input("what is the finish location: ").upper()
     database = read_data_from_csv(database_file)
     stocktake_selection = [d for d in database if range_value_1 <= d["location"] <= range_value_2]
-    print()
-    print(f"This is the selection you have chosen: \n{tabulate(stocktake_selection, headers='keys', tablefmt='grid')}")
-    print()
-    selection_ok = input("\033[1mOk to continue with the selection? (Y/N): \033[0m")
-    print()
-    if selection_ok.upper() == "Y":
-        return stocktake_selection
-    elif selection_ok.upper() == "N":
-        print("Selection removed. Returning to Menu...")
-        time.sleep(1)
+    if stocktake_selection:
+        print()
+        print(f"This is the selection you have chosen: \n{tabulate(stocktake_selection, headers='keys', tablefmt='grid')}")
+        print()
+        selection_ok = input("\033[1mOk to continue with the selection? (Y/N): \033[0m")
+        print()
+        if selection_ok.upper() == "Y":
+            return stocktake_selection
+        elif selection_ok.upper() == "N":
+            print("Selection removed. Returning to Menu...")
+            time.sleep(1)
+        else:
+            print("Invalid Input. Returning to Menu...")
+            time.sleep(1)    
     else:
-        print("Invalid Input. Returning to Menu...")
-        time.sleep(1)        
+        print()
+        print("No data range selected. Returning to Menu...")
+        time.sleep(1)    
 
 #Performs a cycle code selection prompt for stocktake setup
 def cycle_code():
@@ -37,19 +42,25 @@ def cycle_code():
     cycle_selection = input("What is the cycle code: ").upper()
     database = read_data_from_csv(database_file)
     stocktake_selection = [d for d in database if cycle_selection == d["cyclecode"]]
-    print()
-    print(f"This is the selection you have chosen: \n{tabulate(stocktake_selection, headers='keys', tablefmt='grid')}")
-    print()
-    selection_ok = input("\033[1mOk to continue with the selection? (Y/N): \033[0m")
-    print()
-    if selection_ok.upper() == "Y":
-        return stocktake_selection
-    elif selection_ok.upper() == "N":
-        print("Selection removed. Returning to Menu...")
-        time.sleep(1)
+    if stocktake_selection:
+        print()
+        print(f"This is the selection you have chosen: \n{tabulate(stocktake_selection, headers='keys', tablefmt='grid')}")
+        print()
+        selection_ok = input("\033[1mOk to continue with the selection? (Y/N): \033[0m")
+        print()
+        if selection_ok.upper() == "Y":
+            return stocktake_selection
+        elif selection_ok.upper() == "N":
+            print("Selection removed. Returning to Menu...")
+            time.sleep(1)
+        else:
+            print("Invalid Input. Returning to Menu...")
+            time.sleep(1) 
     else:
-        print("Invalid Input. Returning to Menu...")
+        print()
+        print("No data range selected. Returning to Menu...")
         time.sleep(1) 
+
 
 #generates a count sheet of range of values 
 def create_count_sheet(selection_data):
@@ -80,9 +91,7 @@ def input_counts(selection_data):
                     print("Invalid input. Please enter an integer value.")
         subset_keys = ["stockcode", "units"]
         print()
-        print(tabulate([{k: item[k] for k in subset_keys} for item in count],
-                       headers="keys",
-                       tablefmt="grid"))
+        print(tabulate([{k: item[k] for k in subset_keys} for item in count], headers="keys", tablefmt="grid"))
         while True:
             print()
             choice = input("\033[1mAre you happy with the quantities shown on screen? (Y/N): \033[0m")
