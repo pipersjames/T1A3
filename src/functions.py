@@ -15,8 +15,6 @@ def location_to_location():
         reader = csv.DictReader(info)
         data = list(reader)
 
-
-
     stocktake_selection = [d for d in data if range_value_1 <= d["location"] <= range_value_2]
 
     print(f"This is the selection you have chosen: \n{tabulate(stocktake_selection, headers='keys', tablefmt='grid')}")
@@ -54,8 +52,20 @@ def cycle_code():
         print("Invalid Input. Returning to Menu...")
         time.sleep(1) 
 
+#generates a count sheet of range of values 
+def print_count_sheet(selection_data):
 
+    data = copy.deepcopy(selection_data)
 
+    for i in range(len(data)):
+        data[i].pop("units")
+        data[i].pop("costperunit")
+        data[i].update({"count" : " "}) 
+
+    print(tabulate(data, headers="keys", tablefmt="grid"), file=open("count_sheet.txt", "w"))
+    print("-----------------------------------------------------")
+    print("The count sheet has been generated as count_sheet.txt")
+    print("-----------------------------------------------------")
 
 #takes user input for counted items
 def input_counts(selection_data):
@@ -82,23 +92,6 @@ def input_counts(selection_data):
         if choice.upper() == "Y":
             break
     return count
-
-
-
-#generates a count sheet of range of values 
-def print_count_sheet(selection_data):
-
-    data = copy.deepcopy(selection_data)
-
-    for i in range(len(data)):
-        data[i].pop("units")
-        data[i].pop("costperunit")
-        data[i].update({"count" : " "}) 
-
-    print(tabulate(data, headers="keys", tablefmt="grid"), file=open("count_sheet.txt", "w"))
-    print("-----------------------------------------------------")
-    print("The count sheet has been generated as count_sheet.txt")
-    print("-----------------------------------------------------")
 
 #creates a variance report saving a copy by the name chosen
 def generate_variance_report(selection_data, count):
@@ -135,10 +128,6 @@ def generate_variance_report(selection_data, count):
     print("---------------------------------------------------------------------")
     
     return variance_report
-
-
-
-
 
 #confirm variances and updates the database to reflect counts
 def confirm_and_commit_changes(count):

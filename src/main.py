@@ -23,7 +23,7 @@ def menu_selection():
         print(f"""
     {open_message}
 
-        1. Select Cycle counting method;
+        1. Select stocktaking method and define range;
             \u2022 Location to Location (L)
             \u2022 Cycle Code (C)
         2. Print Count Sheet (P)
@@ -40,13 +40,13 @@ def menu_selection():
             break
 
         elif choice in menu_options:
-            if choice == "L":
-                stocktake_selection = menu_options[choice]()
+            if choice == "L" or choice == "C":
+                stocktake_selection = menu_options[choice]()               
             elif choice == "I" or choice == "P":
                 if stocktake_selection:
                     count = menu_options[choice](stocktake_selection)
                 else:
-                    print("No stocktake selection available. Please proceed to select a counting method first")
+                    print("No stocktake selection available. Please select a stocktaking method and define a range")
             elif choice == "R":
                 menu_options[choice](stocktake_selection,count)
             elif choice == "F":
