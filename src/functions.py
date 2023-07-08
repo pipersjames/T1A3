@@ -1,5 +1,6 @@
 import csv
 from tabulate import tabulate
+from datetime import datetime
 
 #setup list and stocktake for location to location count
 def location_to_location():
@@ -65,35 +66,38 @@ def input_counts(selection_data):
             break
     return count
 
-
-
-    # while True:
-    #     count_input.clear()
-
-    #     for i in range(len(count_items)):
-    #         count = input(f"Please enter the count of item {count_items[i]} : ")
-    #         count_input.append(count)
-
-    #     dict_of_counts = dict(zip(count_items, count_input))
-    #     print(tabulate(dict_of_counts, headers="keys", tablefmt="grid"))
-
-    #     while True:
-    #         choice = input("Are you happy with the quantities? (Y/N): ")
-    #         if choice.upper() == "Y":
-    #             break
-    #         elif choice.upper() == "N":
-    #             break
-    #         else:
-    #             print("Invalid selection. Try pressing either Y for yes or N for no")
-
-    #     if choice.upper() == "Y":
-    #         break
-    print(counts)
-    return counts
-
 #creates a variance report saving a copy by the name chosen
-def generate_variance_report():
-    pass
+def generate_variance_report(selection_data, count):
+
+    variance_report = []
+    prepared_changes = []
+
+    for database, changes in zip(selection_data, count):
+        stockcode = database["stockcode"]
+        description = database["description"]
+        location = database["location"]
+        units1 = database["units"]
+        units2 = changes["units"]
+        costperunit = database["costperunit"]
+        variance = int(units1) - int(units2)
+        totalcost = int(variance) * int(costperunit)
+        variance_report.append({"stockcode": stockcode, "description": description, "units_in_database": units1, "count": units2, "variance": variance, "cost_difference": totalcost}) 
+        # prepared_changes.append({"stockcode": stockcode, "description": description, "location": location, "units": units2, "costperunit": costperunit})
+
+    current_date = datetime.now().strftime("%d-%b-%Y")
+    file_name = f"variances_{current_date}.txt"
+    print(tabulate(variance_report, headers="keys", tablefmt="grid"), file=open(file_name, "w"))
+    print("-----------------------------------------------------")
+    print(f"The variance report has been generated as {file_name}")
+    print("-----------------------------------------------------")
+    # print(prepared_changes)
+    
+    return variance_report
+    # return prepared_changes
+
+
+
+
 
 #confirm variances and updates the database to reflect counts
 def confirm_and_commit_changes():

@@ -8,7 +8,7 @@ def menu_selection():
     open_message = "Welcome to the Stocktake App, Please choose what you would like to do from the list of options;"
 
     stocktake_selection = []
-    dict_of_counts = {}
+    count = []
 
     menu_options = {
         "L": functions.location_to_location,
@@ -44,9 +44,11 @@ def menu_selection():
                 stocktake_selection = menu_options[choice]()
             elif choice == "I" or choice == "P":
                 if stocktake_selection:
-                    dict_of_counts = menu_options[choice](stocktake_selection)
+                    count = menu_options[choice](stocktake_selection)
                 else:
                     print("No stocktake selection available. Please proceed to select a counting method first")
+            elif choice == "R":
+                menu_options[choice](stocktake_selection,count)
             else:
                 menu_options[choice]()
             
