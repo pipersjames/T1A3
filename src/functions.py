@@ -7,7 +7,7 @@ import time
 
 #setup list and stocktake for location to location count
 def location_to_location():
-
+    print()
     range_value_1 = input("what is the start location: ").upper()
     range_value_2 = input("what is the finish location: ").upper()
 
@@ -17,8 +17,10 @@ def location_to_location():
 
     stocktake_selection = [d for d in data if range_value_1 <= d["location"] <= range_value_2]
 
+    print()
     print(f"This is the selection you have chosen: \n{tabulate(stocktake_selection, headers='keys', tablefmt='grid')}")
-    selection_ok = input("Ok to continue? (Y/N): ")
+    print()
+    selection_ok = input("\033[1mOk to continue with the selection? (Y/N): \033[0m")
     print()
     if selection_ok.upper() == "Y":
         return stocktake_selection
@@ -32,6 +34,7 @@ def location_to_location():
 #setup list and stocktake for cycle code count
 def cycle_code():
     
+    print()
     cycle_selection = input("What is the cycle code: ").upper()
 
     with open("database.csv") as data:
@@ -40,8 +43,10 @@ def cycle_code():
 
     stocktake_selection = [d for d in database if cycle_selection == d["cyclecode"]]
 
+    print()
     print(f"This is the selection you have chosen: \n{tabulate(stocktake_selection, headers='keys', tablefmt='grid')}")
-    selection_ok = input("Ok to continue? (Y/N): ")
+    print()
+    selection_ok = input("\033[1mOk to continue with the selection? (Y/N): \033[0m")
     print()
     if selection_ok.upper() == "Y":
         return stocktake_selection
@@ -53,19 +58,22 @@ def cycle_code():
         time.sleep(1) 
 
 #generates a count sheet of range of values 
-def print_count_sheet(selection_data):
+def create_count_sheet(selection_data):
 
     data = copy.deepcopy(selection_data)
 
     for i in range(len(data)):
         data[i].pop("units")
         data[i].pop("costperunit")
+        data[i].pop("cyclecode")
         data[i].update({"count" : " "}) 
 
     print(tabulate(data, headers="keys", tablefmt="grid"), file=open("count_sheet.txt", "w"))
+    print()
     print("-----------------------------------------------------")
     print("The count sheet has been generated as count_sheet.txt")
     print("-----------------------------------------------------")
+    time.sleep(1)
 
 #takes user input for counted items
 def input_counts(selection_data):
@@ -73,21 +81,24 @@ def input_counts(selection_data):
         count = copy.deepcopy(selection_data)
 
         for item in count:
+            print()
             item["units"] = input(f"Please enter the count of item {item['stockcode']} : ")
 
         subset_keys = ["stockcode", "units"]
+        print()
         print(tabulate([{k: item[k] for k in subset_keys} for item in count],
                        headers="keys",
                        tablefmt="grid"))
 
         while True:
-            choice = input("Are you happy with the quantities? (Y/N): ")
+            print()
+            choice = input("\033[1mAre you happy with the quantities shown on screen? (Y/N): \033[0m")
             if choice.upper() == "Y":
                 break
             elif choice.upper() == "N":
                 break
             else:
-                print("Invalid selection. Try pressing either Y for yes or N for no")
+                print("\033[1mInvalid selection. Try pressing either Y for yes or N for no\033[0m")
 
         if choice.upper() == "Y":
             break
@@ -122,17 +133,20 @@ def generate_variance_report(selection_data, count):
     if not os.path.exists(folder_path):
         os.makedirs(folder_path) 
 
+    print()
     print(tabulate(variance_report, headers="keys", tablefmt="grid"), file=open(file_path, "w"))
     print("---------------------------------------------------------------------")
     print(f"The variance report has been generated as {file_name}")
     print("---------------------------------------------------------------------")
+    time.sleep(1)
     
     return variance_report
 
 #confirm variances and updates the database to reflect counts
 def confirm_and_commit_changes(count):
     
-    confirmation = input("Are you sure you wish to proceed in committing changes to the database? (Y/N)")
+    print()
+    confirmation = input("\033[1;31mAre you sure you wish to proceed in committing changes to the database? (Y/N): \033[0m")
 
     if confirmation.upper() == "Y":
         changes = copy.deepcopy(count)
@@ -155,13 +169,21 @@ def confirm_and_commit_changes(count):
             writer = csv.DictWriter(info, fieldnames=fieldnames)
             writer.writeheader()
             writer.writerows(data)
-
+        
+        print()
+        print("----------------------------------------------------------------")
         print("Changes have been commited to the database, returning to menu...")
+        print("----------------------------------------------------------------")
+        time.sleep(1)
     
     elif confirmation.upper() == "N":
+        print()
         print("No changes have been made, returning to menu...")
+        time.sleep(1)
     else:
+        print()
         print("Invalid Input, returning to menu...")
+        time.sleep(1)
         
 
         

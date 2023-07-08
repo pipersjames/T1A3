@@ -1,11 +1,12 @@
 import sys
 import functions
+import time
 
 
 def menu_selection():
 
 
-    open_message = "Welcome to the Stocktake App, Please choose what you would like to do from the list of options;"
+    open_message = "\033[1;95mWelcome to the Stocktake App, Please choose what you would like to do from the list of options;\033[0m"
 
     stocktake_selection = []
     count = []
@@ -13,7 +14,7 @@ def menu_selection():
     menu_options = {
         "L": functions.location_to_location,
         "C": functions.cycle_code,
-        "P": functions.print_count_sheet,
+        "S": functions.create_count_sheet,
         "I": functions.input_counts,
         "R": functions.generate_variance_report,
         "F": functions.confirm_and_commit_changes,
@@ -21,20 +22,20 @@ def menu_selection():
 
     while True:
         print(f"""
-    {open_message}
+{open_message}
 
-        1. Select stocktaking method and define range;
-            \u2022 Location to Location (L)
-            \u2022 Cycle Code (C)
-        2. Print Count Sheet (P)
-        3. Input Counts (I)
-        4. Generate Variance Report (R)
-        5. Confirm and Commit Changes (F)
-        6. Exit the Program (E)
+    1. Select stocktaking method and define range;
+        \u2022 Location to Location (L)
+        \u2022 Cycle Code (C)
+    2. Create Count Sheet (S)
+    3. Input Counts (I)
+    4. Generate Variance Report (R)
+    5. Confirm and Commit Changes (F)
+    6. Exit the Program (E)
     """)
         
-        open_message = "What would you like to do now?"
-        choice = input(">").upper()
+        open_message = "\033[1;95mWhat would you like to do now?\033[0m"
+        choice = input("\033[1mPlease enter the letter corresponding to your menu choice: \033[0m").upper()
 
         if choice == "E":
             break
@@ -42,19 +43,29 @@ def menu_selection():
         elif choice in menu_options:
             if choice == "L" or choice == "C":
                 stocktake_selection = menu_options[choice]()               
-            elif choice == "I" or choice == "P":
+            elif choice == "S" or choice == "I":
                 if stocktake_selection:
                     count = menu_options[choice](stocktake_selection)
                 else:
-                    print("No stocktake selection available. Please select a stocktaking method and define a range")
+                    print()
+                    print("----------------------------------------------------------------------------------------------------------")
+                    print("No stocktake selection available. Please select a stocktaking method and define a range before continue...")
+                    print("----------------------------------------------------------------------------------------------------------")
+                    time.sleep(1)
             elif choice == "R":
                 menu_options[choice](stocktake_selection,count)
             elif choice == "F":
                 menu_options[choice](count)
-            else:
-                menu_options[choice]()
-            
-    print("Thank you for using the Stocktake App. Happy counting!")
+        else:
+            open_message = "\033[1;95mPlease choose from the menu below\033[0m"
+            print()
+            print("----------------------------------")
+            print("Invalid Input. Please try again...")
+            print("----------------------------------")
+            time.sleep(1)
+
+    print()        
+    print("\033[1;95mThank you for using the Stocktake App. Happy counting!\033[0m")
 
 
 menu_selection()
