@@ -41,22 +41,16 @@ def print_count_sheet(selection_data):
 
 #takes user input for counted items
 def input_counts(selection_data):
-    count_items = []
-    count_input = []
-    dict_of_counts = {}
-
-    for row in selection_data:
-        count_items.append(row["stockcode"])
-
     while True:
-        count_input.clear()
+        count = selection_data
 
-        for i in range(len(count_items)):
-            count = input(f"Please enter the count of item {count_items[i]} : ")
-            count_input.append(count)
+        for item in count:
+            item["units"] = input(f"Please enter the count of item {item['stockcode']} : ")
 
-        dict_of_counts = dict(zip(count_items, count_input))
-        print(tabulate(dict_of_counts, headers="keys", tablefmt="grid"))
+        subset_keys = ["stockcode", "units"]
+        print(tabulate([{k: item[k] for k in subset_keys} for item in count],
+                       headers="keys",
+                       tablefmt="grid"))
 
         while True:
             choice = input("Are you happy with the quantities? (Y/N): ")
@@ -69,8 +63,33 @@ def input_counts(selection_data):
 
         if choice.upper() == "Y":
             break
+    return count
 
-    return dict_of_counts
+
+
+    # while True:
+    #     count_input.clear()
+
+    #     for i in range(len(count_items)):
+    #         count = input(f"Please enter the count of item {count_items[i]} : ")
+    #         count_input.append(count)
+
+    #     dict_of_counts = dict(zip(count_items, count_input))
+    #     print(tabulate(dict_of_counts, headers="keys", tablefmt="grid"))
+
+    #     while True:
+    #         choice = input("Are you happy with the quantities? (Y/N): ")
+    #         if choice.upper() == "Y":
+    #             break
+    #         elif choice.upper() == "N":
+    #             break
+    #         else:
+    #             print("Invalid selection. Try pressing either Y for yes or N for no")
+
+    #     if choice.upper() == "Y":
+    #         break
+    print(counts)
+    return counts
 
 #creates a variance report saving a copy by the name chosen
 def generate_variance_report():
