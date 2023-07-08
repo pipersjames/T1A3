@@ -1,6 +1,7 @@
 import csv
 from tabulate import tabulate
 from datetime import datetime
+import os
 
 #setup list and stocktake for location to location count
 def location_to_location():
@@ -85,11 +86,21 @@ def generate_variance_report(selection_data, count):
         # prepared_changes.append({"stockcode": stockcode, "description": description, "location": location, "units": units2, "costperunit": costperunit})
 
     current_date = datetime.now().strftime("%d-%b-%Y")
+    folder_name = "variance reports"
     file_name = f"variances_{current_date}.txt"
-    print(tabulate(variance_report, headers="keys", tablefmt="grid"), file=open(file_name, "w"))
-    print("-----------------------------------------------------")
+
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+
+    folder_path = os.path.join(script_dir, folder_name)
+    file_path = os.path.join(folder_path, file_name)
+
+    if not os.path.exists(folder_path):
+        os.makedirs(folder_path) 
+
+    print(tabulate(variance_report, headers="keys", tablefmt="grid"), file=open(file_path, "w"))
+    print("---------------------------------------------------------------------")
     print(f"The variance report has been generated as {file_name}")
-    print("-----------------------------------------------------")
+    print("---------------------------------------------------------------------")
     # print(prepared_changes)
     
     return variance_report
