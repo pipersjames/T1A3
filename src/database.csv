@@ -1,4 +1,4 @@
-stockcode,description,location,units,costperunit
-ULRR1,ultra light red rope,A1,3,20
-SLRR1,super light red rope,A2,5,15
-RLRR1,regular light rede rope,A3,14,10
+stockcode,description,location,units,costperunit,cyclecode
+ULRR1,ultra light red rope,A1,3,20,A
+SLRR1,super light red rope,A2,5,15,A
+RLRR1,regular light rede rope,A3,14,10,B

@@ -25,7 +25,7 @@ def menu_selection():
 
         1. Select Cycle counting method;
             \u2022 Location to Location (L)
-            \u2022 Cycle Code (C) (yet to implement)
+            \u2022 Cycle Code (C)
         2. Print Count Sheet (P)
         3. Input Counts (I)
         4. Generate Variance Report (R)
