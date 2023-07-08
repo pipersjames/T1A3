@@ -1,6 +1,6 @@
 stockcode,description,location,units,costperunit,cyclecode
-ULRR1,ultra light red rope,A1,6,20,A
-SLRR1,super light red rope,A2,6,15,A
+ULRR1,ultra light red rope,A1,5,20,A
+SLRR1,super light red rope,A2,5,15,A
 RLRR1,regular light red rope,A3,14,10,B
 ULBB1,ultra light blue ball,B1,4,25,A
 SLBB1,super light blue ball,B2,9,18,B

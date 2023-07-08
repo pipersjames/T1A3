@@ -1,5 +1,4 @@
-import sys
-import functions
+import menufunctions
 import time
 
 
@@ -12,12 +11,12 @@ def menu_selection():
     count = []
 
     menu_options = {
-        "L": functions.location_to_location,
-        "C": functions.cycle_code,
-        "S": functions.create_count_sheet,
-        "I": functions.input_counts,
-        "R": functions.generate_variance_report,
-        "F": functions.confirm_and_commit_changes,
+        "L": menufunctions.location_to_location,
+        "C": menufunctions.cycle_code,
+        "S": menufunctions.create_count_sheet,
+        "I": menufunctions.input_counts,
+        "R": menufunctions.generate_variance_report,
+        "F": menufunctions.confirm_and_commit_changes,
     }
 
     while True:
