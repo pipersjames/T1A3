@@ -47,7 +47,7 @@ def print_count_sheet(selection_data):
 #takes user input for counted items
 def input_counts(selection_data):
     while True:
-        count = selection_data
+        count = copy.deepcopy(selection_data)
 
         for item in count:
             item["units"] = input(f"Please enter the count of item {item['stockcode']} : ")
@@ -83,7 +83,7 @@ def generate_variance_report(selection_data, count):
         units1 = database["units"]
         units2 = changes["units"]
         costperunit = database["costperunit"]
-        variance = int(units1) - int(units2)
+        variance = int(units2) - int(units1)
         totalcost = int(variance) * int(costperunit)
         variance_report.append({"stockcode": stockcode, "description": description, "units_in_database": units1, "count": units2, "variance": variance, "cost_difference": totalcost}) 
         # prepared_changes.append({"stockcode": stockcode, "description": description, "location": location, "units": units2, "costperunit": costperunit})
