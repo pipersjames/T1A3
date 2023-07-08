@@ -72,7 +72,12 @@ def input_counts(selection_data):
         count = copy.deepcopy(selection_data)
         for item in count:
             print()
-            item["units"] = input(f"Please enter the count of item {item['stockcode']} : ")
+            while True:
+                try:
+                    item["units"] = int(input(f"Please enter the count of item {item['stockcode']} : "))
+                    break
+                except ValueError:
+                    print("Invalid input. Please enter an integer value.")
         subset_keys = ["stockcode", "units"]
         print()
         print(tabulate([{k: item[k] for k in subset_keys} for item in count],
