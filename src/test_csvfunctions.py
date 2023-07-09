@@ -1,6 +1,5 @@
 import csv
 from csvfunctions import read_data_from_csv, write_data_to_csv
-import pytest
 
 def test_read_data_from_csv(tmp_path):
     # Create a temporary CSV file with sample data

@@ -1,9 +1,10 @@
-from csvfunctions import read_data_from_csv, write_data_to_csv
-from tabulate import tabulate
-from datetime import datetime
 import os
 import copy
 import time
+from csvfunctions import read_data_from_csv, write_data_to_csv
+from tabulate import tabulate
+from datetime import datetime
+
 
 database_file = "database.csv"
 count_sheet_file = "count_sheet.txt"
@@ -111,7 +112,6 @@ def generate_variance_report(selection_data, count):
     for database, changes in zip(selection_data, count):
         stockcode = database["stockcode"]
         description = database["description"]
-        location = database["location"]
         units1 = database["units"]
         units2 = changes["units"]
         costperunit = database["costperunit"]

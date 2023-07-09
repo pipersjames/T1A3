@@ -1,6 +1,5 @@
 from menufunctions import generate_count_sheet
 from tabulate import tabulate
-import pytest 
 
 
 
@@ -12,8 +11,7 @@ def test_create_count_sheet():
         {"stockcode": "RLRR1", "description": "regular light red rope", "location": "A3", "units": 14, "costperunit": 10, "cyclecode": "B"}
     ]
     generate_count_sheet(selection_data)
-    expected_output = tabulate(
-        [
+    expected_output = tabulate([
             {"stockcode": "ULRR1", "description": "ultra light red rope", "location": "A1", "count": " "},
             {"stockcode": "SLRR1", "description": "super light red rope", "location": "A2", "count": " "},
             {"stockcode": "RLRR1", "description": "regular light red rope", "location": "A3", "count": " "}
