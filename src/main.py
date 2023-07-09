@@ -13,7 +13,7 @@ def menu_selection():
     menu_options = {
         "L": menufunctions.location_to_location,
         "C": menufunctions.cycle_code,
-        "S": menufunctions.create_count_sheet,
+        "S": menufunctions.generate_count_sheet,
         "I": menufunctions.input_counts,
         "R": menufunctions.generate_variance_report,
         "F": menufunctions.confirm_and_commit_changes,
@@ -26,7 +26,7 @@ def menu_selection():
     1. Select stocktaking method and define range;
         \u2022 Location to Location (L)
         \u2022 Cycle Code (C)
-    2. Create Count Sheet (S)
+    2. Generate Count Sheet (S)
     3. Input Counts (I)
     4. Generate Variance Report (R)
     5. Confirm and Commit Changes (F)
@@ -47,12 +47,19 @@ def menu_selection():
                     count = menu_options[choice](stocktake_selection)
                 else:
                     print()
-                    print("----------------------------------------------------------------------------------------------------------")
-                    print("No stocktake selection available. Please select a stocktaking method and define a range before continue...")
-                    print("----------------------------------------------------------------------------------------------------------")
+                    print("----------------------------------------------------------------------------------------------------------------------")
+                    print("No stocktake selection available. Please select a stocktaking method and define a range of values before continuing...")
+                    print("----------------------------------------------------------------------------------------------------------------------")
                     time.sleep(1)
             elif choice == "R":
-                menu_options[choice](stocktake_selection,count)
+                if count:
+                    menu_options[choice](stocktake_selection,count)
+                else:
+                    print()
+                    print("------------------------------------------------------------------------------")
+                    print("No user counts have been entered. Please input the counts before continuing...")
+                    print("------------------------------------------------------------------------------")
+                    time.sleep(1)
             elif choice == "F":
                 menu_options[choice](count)
         else:

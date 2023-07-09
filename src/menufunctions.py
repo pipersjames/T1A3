@@ -46,11 +46,11 @@ def cycle_code():
         print()
         print(f"This is the selection you have chosen: \n{tabulate(stocktake_selection, headers='keys', tablefmt='grid')}")
         print()
-        selection_ok = input("\033[1mOk to continue with the selection? (Y/N): \033[0m")
+        selection_ok = input("\033[1mOk to continue with the selection? (Y/N): \033[0m").upper()
         print()
-        if selection_ok.upper() == "Y":
+        if selection_ok == "Y":
             return stocktake_selection
-        elif selection_ok.upper() == "N":
+        elif selection_ok == "N":
             print("Selection removed. Returning to Menu...")
             time.sleep(1)
         else:
@@ -63,7 +63,7 @@ def cycle_code():
 
 
 #generates a count sheet of range of values 
-def create_count_sheet(selection_data):
+def generate_count_sheet(selection_data):
     data = copy.deepcopy(selection_data)
     for i in range(len(data)):
         data[i].pop("units")
@@ -105,7 +105,7 @@ def input_counts(selection_data):
             break
     return count
 
-#creates a variance report saving a copy by the name chosen
+#generates a variance report saving a copy in the variance reports folder
 def generate_variance_report(selection_data, count):
     variance_report = []
     for database, changes in zip(selection_data, count):
@@ -117,7 +117,31 @@ def generate_variance_report(selection_data, count):
         costperunit = database["costperunit"]
         variance = int(units2) - int(units1)
         totalcost = int(variance) * int(costperunit)
-        variance_report.append({"stockcode": stockcode, "description": description, "units_in_database": units1, "count": units2, "variance": variance, "cost_difference": totalcost})
+        variance_report.append({"stockcode": stockcode, "description": description, "units_in_database": units1, "count": units2, "variance": variance, "cost_variance": totalcost})
+        print()
+    show_report = input("\033[1mWould you like to view the report onscreen? (Y/N): \033[0m").upper()
+    if show_report == "Y":
+        print()
+        print(tabulate(variance_report, headers="keys", tablefmt="grid"))
+        proceed_next_step = input("Continue? (Y/N): ").upper()
+        if proceed_next_step == "N":
+            print()
+            print("Report generation cancelled, returning to menu...")
+            time.sleep(1)
+            return
+        elif proceed_next_step == "Y":
+            pass
+        else:
+            print()
+            print("Invalid input. Report generation cancelled, returning to menu...")
+            time.sleep(1)
+            return
+    elif show_report == "N":
+        pass
+    else:
+        print()
+        print("Invalid selection. Report generation cancelled, returing to menu...")
+        return
     current_date = datetime.now().strftime("%d-%b-%Y")
     folder_name = variance_report_folder
     file_name = f"variances_{current_date}.txt"
@@ -137,7 +161,7 @@ def generate_variance_report(selection_data, count):
 #confirm variances and updates the database to reflect counts
 def confirm_and_commit_changes(count):
     print()
-    confirmation = input("\033[1;31mAre you sure you wish to proceed in committing changes to the database? (Y/N): \033[0m")
+    confirmation = input("\033[1;31mWarning!\033[0m Are you sure you wish to proceed in committing changes to the database? (Y/N): ")
     if confirmation.upper() == "Y":
         changes = copy.deepcopy(count)
         confirmation_file = []
@@ -148,7 +172,7 @@ def confirm_and_commit_changes(count):
                 if item_in_database["stockcode"] == item_in_changes_id:
                     item_in_database.update(item_in_changes)
                     break
-        fieldnames = database[0].keys()  
+        fieldnames = database[0].keys()
         write_data_to_csv(database_file, database, fieldnames)
         print()
         print("----------------------------------------------------------------")
@@ -161,7 +185,7 @@ def confirm_and_commit_changes(count):
         time.sleep(1)
     else:
         print()
-        print("Invalid Input, returning to menu...")
+        print("Invalid Input. No changes have been made, returning to menu...")
         time.sleep(1)
         
 
