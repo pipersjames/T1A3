@@ -1,5 +1,7 @@
-from menufunctions import create_count_sheet
+from menufunctions import generate_count_sheet
 from tabulate import tabulate
+import pytest 
+
 
 
 #Test if the count sheet is produced in the correct format and fields names
@@ -9,7 +11,7 @@ def test_create_count_sheet():
         {"stockcode": "SLRR1", "description": "super light red rope", "location": "A2", "units": 5, "costperunit": 15, "cyclecode": "A"},
         {"stockcode": "RLRR1", "description": "regular light red rope", "location": "A3", "units": 14, "costperunit": 10, "cyclecode": "B"}
     ]
-    create_count_sheet(selection_data)
+    generate_count_sheet(selection_data)
     expected_output = tabulate(
         [
             {"stockcode": "ULRR1", "description": "ultra light red rope", "location": "A1", "count": " "},

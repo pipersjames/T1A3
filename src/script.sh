@@ -71,7 +71,7 @@ source venv/bin/activate
 
 # install pip
 pip3 install tabulate
-
+pip3 install pytest
 # run python file
 clear
 python3 main.py
