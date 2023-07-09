@@ -1,12 +1,12 @@
 stockcode,description,location,units,costperunit,cyclecode
 ULRR1,ultra light red rope,A1,8,20,A
 SLRR1,super light red rope,A2,8,15,A
-RLRR1,regular light red rope,A3,14,10,B
+RLRR1,regular light red rope,A3,5,10,B
 ULBB1,ultra light blue ball,B1,3,25,A
-SLBB1,super light blue ball,B2,9,18,B
-RLBB1,regular light blue ball,B3,11,12,B
+SLBB1,super light blue ball,B2,5,18,B
+RLBB1,regular light blue ball,B3,5,12,B
 ULGG1,ultra light green glove,C1,5,22,A
-SLGG1,super light green glove,C2,6,17,B
+SLGG1,super light green glove,C2,5,17,B
 RLGG1,regular light green glove,C3,3,11,A
 CLRR1,compact light red rope,D1,8,19,C
 CGGG1,compact light green glove,D2,5,21,C

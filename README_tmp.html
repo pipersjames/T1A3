@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>README.md</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+html,footer,header{
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Custom MD PDF CSS
+ */
+html,footer,header{
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+
+ }
+body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+<link rel="stylesheet" href="file:///home/james/JamesPipers_T1A3/R%3A%5C2.Travail%5C1.Enseignement%5CCours%5C_1.Outils%5C2.Developpement%5C1.SCSS%5Cmain.css" type="text/css"><link rel="stylesheet" href="file:///home/james/JamesPipers_T1A3/D%3A%5Crdaros%5CCours%5C_1.Outils%5C2.Developpement%5C1.SCSS%5Cmain.css" type="text/css">
+</head>
+
+<body>
+    <h1 id="stocktake-app---documentation">Stocktake app - Documentation</h1>
+<p>This terminal application is designed to aid in stocktaking smaller operations. designed to be lightweight and compatible with excel programs via the use of CSV.</p>
+<h3 id="link-to-presentation-video">Link to presentation video</h3>
+<p>https://youtu.be/Jtrc3IAIeVY</p>
+<hr>
+<h3 id="getting-started">Getting Started</h3>
+<p>Before we proceed, please note that the application is dependant on a Unix-like operating system (e.g., Linux, macOS) or a compatible shell environment (e.g., Git Bash on Windows).</p>
+<p>A database source file with the following headings: stockcode, description, location, units, costperunit, cyclecode is required. <code>database.csv</code> has been included in this file package in the src directory as a functional example. However the assumption is that the User will provide a database of their own stock items and it must adhere to the conventions the example document.</p>
+<p>There is also a number of application dependancies that if you choose to do so can be installed manually prior to the running of shell script <code>script.sh</code>. Manual installation is not required as the shell script will attempt to install these automatically if they have yet to be installed.</p>
+<p>Dependancies as follows;</p>
+<ul>
+<li>Python3</li>
+<li>pip3</li>
+<li>virtualenv</li>
+<li>tabulate (only in virtual environment)</li>
+</ul>
+<p>For testing an additional dependancy is exists. Please install pytest by running the following in the command line if you wish to have this functionality:</p>
+<pre class="hljs"><code><div>pip3 install pytest
+</div></code></pre>
+<hr>
+<h3 id="running-the-program">Running the Program</h3>
+<ol>
+<li>
+<p>Open Terminal.</p>
+</li>
+<li>
+<p>Navigate to the /src directory to find the <code>script.sh</code> file.</p>
+</li>
+<li>
+<p>Run the below commands in the terminal session:</p>
+</li>
+</ol>
+<pre class="hljs"><code><div>chmod +x script.sh
+./script.sh
+</div></code></pre>
+<p>Note: <code>chmod +x script.sh</code> command is not needed if the file is already excutionable.</p>
+<hr>
+<h3 id="attribution-sources">Attribution Sources</h3>
+<p>The following sources were used to help plan and construct the application.</p>
+<ul>
+<li>ChatGPT</li>
+<li>Coder Academy lessions</li>
+<li>Trello.com</li>
+</ul>
+<hr>
+<h3 id="github-source-repository">GitHub Source Repository</h3>
+<p>https://github.com/pipersjames/T1A3</p>
+<hr>
+<h3 id="code-style-guide-and-styling-convention">Code Style guide and styling convention</h3>
+<p>The Project attempts to follow the style of PEP 8. some of the basics of this style include:</p>
+<ul>
+<li>4 spaces per indentation level</li>
+</ul>
+<pre class="hljs"><code><div>def input_counts(selection_data):
+    while True: 
+</div></code></pre>
+<ul>
+<li>Imports first in document and on seperate lines</li>
+</ul>
+<pre class="hljs"><code><div>import os
+import copy
+import time
+</div></code></pre>
+<p>For further information on this style see link below:</p>
+<p><a href="https://peps.python.org/pep-0008/">PEP8 style guide</a></p>
+<hr>
+<h3 id="features-in-application">Features in Application</h3>
+<p><strong>A menu</strong></p>
+<p>A list of functions that can be selected by the user. On completion or termination of a task the user will come back to this menu. The application can be terminated from this menu by user input.</p>
+<p><strong>Select a counting method between cyclic or location to location</strong></p>
+<p>This feature allows the user to select either the location or cyclic code data in the CSV to effectively run their stocktake. It will loop over the selection pulling out items that meet the condition set by the user. It set this data into a variable that can be accessed by the other functions in the app. It then provides feedback to the user and confirms if they wish to continue with the selection.</p>
+<p><strong>Generate count sheets</strong></p>
+<p>Takes the data from the counting method selection and tabulates it in an easy to read way providing only essential data. It stores this data into a text file the user can print out and write on.</p>
+<p><strong>Receives user input with respect to counts made</strong></p>
+<p>Let's the user input the manual counts into the program to be accessed by other functions. Asks the user to verify if they are happy with the result by displaying a table output of the entries onscreen.</p>
+<p><strong>Generates variance reports</strong></p>
+<p>Takes the data from the user input and creates a variance report. This report provides information on the changes in stock level from before and after. It also provides a breakdown of the cost involved in the transaction. The user is given the option to view these variances onscreen prior to writing the report to file. Saves the file in a subfolder called variance reports with today's date for the auditor.</p>
+<p><strong>Make changes to a database from the user Input</strong></p>
+<p>Takes the input from the user and overwrites the data in the database with these changes. Asks for user confirmation before doing so giving a warning message. Won't commit any changes unless the user confirms.</p>
+<h3 id="plan-of-implementation">Plan of Implementation</h3>
+<ol>
+<li>
+<p>Create a CSV file housing the database of stock related information.</p>
+</li>
+<li>
+<p><strong>Count sheet</strong> implementation.</p>
+<ul>
+<li>read data from database</li>
+<li>store data into variable</li>
+<li>modify data to show stockcode,description,location and blank column called count</li>
+<li>put data into fancy table</li>
+<li>save table in txt for printing</li>
+<li>advise the user of file creation</li>
+<li>error handling for no method selection (after implementation of selection method)</li>
+</ul>
+</li>
+<li>
+<p><strong>Menu</strong> for selection to be implemented in it's own function. data needs to loop to allow selection of multiple functions.</p>
+<ul>
+<li>List of options with command to call</li>
+<li>Loop the menu after each selection is complete</li>
+<li>User input for option selection</li>
+<li>Option to exit the program and loop</li>
+<li>Control warnings if data for function not found</li>
+</ul>
+</li>
+<li>
+<p><strong>Take user input for counts</strong></p>
+<ul>
+<li>Create a copy of the selection data to prevent it's modification</li>
+<li>Create a loop for the user to input</li>
+<li>Print out each item line by line asking for user input of the count</li>
+<li>Store the count of the user for each item</li>
+<li>Show the user the final counts</li>
+<li>Get user confirmation or return to beginning of loop for re-input</li>
+<li>Error handling for later calculations</li>
+</ul>
+</li>
+<li>
+<p><strong>Location to Location</strong></p>
+<ul>
+<li>Take user input for start location and end location</li>
+<li>Read the database into a list of dictionaries</li>
+<li>Filter the dictionaires outside of range defined by user</li>
+<li>Show selection to the user</li>
+<li>Ask for confirmation</li>
+<li>Error handling to manage confirmation case and no data selected.</li>
+</ul>
+</li>
+<li>
+<p><strong>Variance Report</strong></p>
+<ul>
+<li>Create empty list</li>
+<li>Zip the selection and user inputted counts into a single list</li>
+<li>Find the difference between the counted units and the original selections units</li>
+<li>Find the total cost of the difference between units</li>
+<li>Extract elements needed from that list into the previously empty list</li>
+<li>Tabulate the data</li>
+<li>Save the data into a text document for auditors. Title must include the date of completion</li>
+<li>Ask the user if they would like to view the report before committing to saving it.</li>
+<li>Error handling for input cases.</li>
+</ul>
+</li>
+<li>
+<p><strong>Confirm and commit Changes</strong></p>
+<ul>
+<li>Read the database</li>
+<li>Make changes to the read, substituting the counts to overwrite</li>
+<li>Write those changes back to the database</li>
+<li>Ask the user if they are sure they want to commit the changes to database.</li>
+<li>Error handling for cases where the user declines or inputs the wrong thing.</li>
+</ul>
+</li>
+<li>
+<p><strong>Cycle code setup</strong></p>
+<ul>
+<li>Ask for user input of a cycle code</li>
+<li>Read the database</li>
+<li>Filter the dictionaries that have the cycle code matching the user input</li>
+<li>Print the chosen selection onscreen</li>
+<li>Prompt user for confirmation</li>
+<li>Error handling for option cases and empty selection</li>
+</ul>
+</li>
+<li>
+<p>Review the code looking to apply some DRY principles and make the user interface more visually appealing.</p>
+</li>
+</ol>
+<p>Implementation of the these steps were tracked through the use of Trello. Please follow the link to the <a href="https://trello.com/b/iCG15EOb/t1a3">Trellow workspace</a>.</p>
+<p>Screenshots below shown in order of actualization.</p>
+<p><img src="file:///home/james/JamesPipers_T1A3/docs/first screenshot of planning.JPG" alt="first screenshot"><br>
+<img src="file:///home/james/JamesPipers_T1A3/docs/second screenshot.JPG" alt="second screenshot of Trello board"><br>
+<img src="file:///home/james/JamesPipers_T1A3/docs/third screenshot.JPG" alt="third screenshot of Trello board"><br>
+<img src="file:///home/james/JamesPipers_T1A3/docs/fourth screenshot.JPG" alt="fourth screenshot of Trello board"><br>
+<img src="file:///home/james/JamesPipers_T1A3/docs/fifth screenshot.JPG" alt="fifth screenshot of Trello board"><br>
+<img src="file:///home/james/JamesPipers_T1A3/docs/sixth screenshot.JPG" alt="sixth screenshot of Trello board"><br>
+<img src="file:///home/james/JamesPipers_T1A3/docs/seventh screenshot.JPG" alt="seventh screenshot of Trello board"><br>
+<img src="file:///home/james/JamesPipers_T1A3/docs/eighth screenshot.JPG" alt="eighth screenshot of Trello board"></p>
+
+</body>
+
+</html>

@@ -1,6 +1,10 @@
-#Stocktake app - Documentation
+# Stocktake app - Documentation
 
 This terminal application is designed to aid in stocktaking smaller operations. designed to be lightweight and compatible with excel programs via the use of CSV.
+
+### Link to presentation video
+
+https://youtu.be/Jtrc3IAIeVY
 
 ---
 
@@ -8,9 +12,9 @@ This terminal application is designed to aid in stocktaking smaller operations. 
 
 Before we proceed, please note that the application is dependant on a Unix-like operating system (e.g., Linux, macOS) or a compatible shell environment (e.g., Git Bash on Windows).
 
-A database source file with the following headings: stockcode, description, location, units, costperunit, cyclecode is required. ```database.csv``` has been included in this file package in the src directory as a functional example. 
+A database source file with the following headings: stockcode, description, location, units, costperunit, cyclecode is required. ```database.csv``` has been included in this file package in the src directory as a functional example. However the assumption is that the User will provide a database of their own stock items and it must adhere to the conventions the example document.
 
-There is also a number of other dependancies that if you choose to do so can be installed manually prior to the running of shell script ```script.sh```. Otherwise the Shell script will attempt to install these automatically.
+There is also a number of application dependancies that if you choose to do so can be installed manually prior to the running of shell script ```script.sh```. Manual installation is not required as the shell script will attempt to install these automatically if they have yet to be installed.
 
 Dependancies as follows;
 
@@ -19,7 +23,7 @@ Dependancies as follows;
 * virtualenv
 * tabulate (only in virtual environment)
 
-For testing an additional dependancy is exists, please install pytest by running the following in the command line if you wish to have this functionality:
+For testing an additional dependancy is exists. Please install pytest by running the following in the command line if you wish to have this functionality:
 
 ```
 pip3 install pytest
